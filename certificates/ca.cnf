@@ -8,11 +8,11 @@ output_password        = password
 
 [ req_distinguished_name ]
 C                      = US
-ST                     = NY
-L                      = NYC
-O                      = Stark Industries
-OU                     = Stark Certificate Authority
-CN                     = StarkCA
+ST                     = CA
+L                      = SF
+O                      = Postman
+OU                     = Postman Certificate Authority
+CN                     = PostmanCA
 emailAddress           = do.not@email.me
 
 [ req_attributes ]

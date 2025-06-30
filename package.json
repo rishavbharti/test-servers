@@ -8,9 +8,15 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.6.7",
     "@grpc/proto-loader": "^0.6.13",
-    "graphql": "^15.0.0",
+    "express": "^5.1.0",
+    "graphql": "^16.10.0",
     "grpc-node-server-reflection": "^1.0.2",
     "http-proxy": "^1.18.1",
-    "server-destroy": "^1.0.1"
+    "httpntlm": "^1.8.13",
+    "lodash": "4.17.21",
+    "passport": "^0.7.0",
+    "passport-http": "^0.3.0",
+    "server-destroy": "^1.0.1",
+    "ws": "^8.18.2"
   }
 }

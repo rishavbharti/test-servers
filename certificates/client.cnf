@@ -8,10 +8,10 @@ output_password        = password
 
 [ req_distinguished_name ]
 C                      = US
-ST                     = NY
-L                      = NYC
-O                      = Stark Industries
-OU                     = stark@localhost
+ST                     = CA
+L                      = SF
+O                      = Postman
+OU                     = postman@localhost
 CN                     = TestClient
 emailAddress           = do.not@email.me
 

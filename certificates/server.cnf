@@ -7,9 +7,9 @@ prompt                 = no
 
 [ req_distinguished_name ]
 C                      = US
-ST                     = NY
-L                      = NYC
-O                      = Stark Industries
+ST                     = CA
+L                      = SF
+O                      = Postman
 OU                     = test
 CN                     = localhost
 emailAddress           = do.not@email.me
