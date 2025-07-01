@@ -81,29 +81,56 @@ function responseHandler(server) {
     });
 }
 
-responseHandler(httpServer.listen(80));
-responseHandler(httpsServer.listen(443));
+// Start HTTP Proxy Server
+responseHandler(
+    httpServer.listen(80, () => {
+        console.log("🚀 HTTP Proxy Server running on http://localhost:80");
+    })
+);
 
-// fixed port servers
-SERVERS.raw = SERVERS.raw.listen(CONFIG.raw.port);
+// Start HTTPS Proxy Server
+responseHandler(
+    httpsServer.listen(443, () => {
+        console.log("🔒 HTTPS Proxy Server running on https://localhost:443");
+    })
+);
+
+// Start Raw Echo Server
+SERVERS.raw = SERVERS.raw.listen(CONFIG.raw.port, () => {
+    console.log(
+        `📡 Raw Echo Server running on http://localhost:${CONFIG.raw.port}`
+    );
+});
 // SERVERS.ssl_renegotiation = servers.createSSLRenegotiationServer().listen(CONFIG.ssl_renegotiation.port);
+
+// Start SSL Client Authentication Server (mTLS)
 servers
     .createSSLServer(CONFIG.ssl_client)
-    .listen(CONFIG.ssl_client.port)
+    .listen(CONFIG.ssl_client.port, () => {
+        console.log(
+            `🔐 SSL Client Auth Server (mTLS) running on https://localhost:${CONFIG.ssl_client.port}`
+        );
+    })
     .on("request", (req, res) => res.end("Okay!"));
 
-// TLS servers
+// Start TLS Version-Specific Servers
 ["1", "1.1", "1.2", "1.3"].forEach((version) => {
+    const port = 7000 + parseInt(version.split(".").join(""));
     servers
         .createSSLServer({
             maxVersion: "TLSv" + version,
             minVersion: "TLSv" + version,
         })
-        .listen(7000 + parseInt(version.split(".").join("")))
+        .listen(port, () => {
+            console.log(
+                `🔒 TLS ${version} Server running on https://localhost:${port}`
+            );
+        })
         .on("request", (req, res) => res.end("Okay!"));
 });
 
+// Start WebSocket Server (WSS)
 const wssServer = servers.createWSSServer();
 wssServer.listen(9443, () => {
-    console.log("WSS server running on wss://localhost:9443");
+    console.log("🌐 WebSocket Server (WSS) running on wss://localhost:9443");
 });
